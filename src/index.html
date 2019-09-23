@@ -78,7 +78,7 @@
   </div> -->
 
   <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtfGYbbR4Ik7KpaBjxzKFutundW2d_XOE&libraries=places&callback=init"
+    src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=init"
     async defer></script>
 
   <script>
@@ -93,7 +93,7 @@
 
     function initMap() {
       map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: -34.397, lng: 150.644 },
+        center: { lat: -38.397, lng: 140.644 },
         zoom: 8
       });
 
@@ -121,12 +121,9 @@
 
       console.log('autoco',autocomplete);
 
-      gogo = new google.maps.LatLng(10.0,-10).0;
-      console.log('gogo', gogo);
-
       // Avoid paying for data that you don't need by restricting the set of
       // place fields that are returned to just the address components.
-      autocomplete.setFields(['address_component']);
+      autocomplete.setFields(['address_component','geometry']); // get from here the coords
 
       // When the user selects an address from the drop-down, populate the
       // address fields in the form.
@@ -138,8 +135,9 @@
       
       
       var place = autocomplete.getPlace();
+      console.log('a',autocomplete);
+      
       console.log('place', place);
-      console.log('place', autocomplete.getPlace());
       
       for (var component in componentForm) {
         document.getElementById(component).value = '';
